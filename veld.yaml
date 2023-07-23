@@ -1,0 +1,6 @@
+services:
+  veld:
+    build: .
+    volumes:
+      - ./:/veld/executable/
+    command: echo train
