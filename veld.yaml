@@ -3,4 +3,4 @@ services:
     build: .
     volumes:
       - ./:/veld/executable/
-    command: echo train
+    command: python -m spacy train /veld/executable/config.cfg --output /veld/output/m1
