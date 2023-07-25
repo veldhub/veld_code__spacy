@@ -27,7 +27,7 @@ services:
   veld:
     build: .
     volumes:
-      - ./src/:/veld/executable/
+      - ./:/veld/executable/
     command: >
       bash -c "
       python -m spacy train /veld/executable/config.cfg --output /veld/output/1/m1 |& tee /veld/output/2/train.log
