@@ -9,7 +9,7 @@ x-veld:
       "1":
         path: /veld/input/
         format: "spacy DocBin"
-        description: "expecting: train.spacy, dev.spacy, eval.spacy."
+        description: "expecting files: train.spacy, dev.spacy, eval.spacy."
     output:
       "1":
         path: /veld/output/1/
