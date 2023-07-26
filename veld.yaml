@@ -30,7 +30,7 @@ services:
       - ./:/veld/executable/
     command: >
       bash -c "
-      python -m spacy train /veld/executable/config.cfg --output /veld/output/1/m1 |& tee /veld/output/2/train.log
+      python -m spacy train /veld/executable/config2.cfg --output /veld/output/1/m1 |& tee /veld/output/2/train.log
       && python -m spacy evaluate /veld/output/1/m1/model-best/ /veld/input/eval.spacy |& tee /veld/output/2/eval.log
       "
 
