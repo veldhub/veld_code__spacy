@@ -1,41 +1,46 @@
 x-veld:
   executable:
     about:
-      description: "A NER trainig setup, utilizing spacy3's config system."
+      description: "A NER trainig setup, utilizing spaCy3's config system."
       topic:
         - "NLP"
         - "Machine learning"
+        - "Named entity recognition"
     input:
       a:
         type: "file"
         format: "spaCy DocBin"
-        content: "Named Entity Recognition gold data" 
+        content: "Named entity recognition gold data" 
         path: /veld/input/train.spacy
         description: "train data"
       b:
         type: "file"
         format: "spaCy DocBin"
-        content: "Named Entity Recognition gold data" 
+        content: "Named entity recognition gold data" 
         path: /veld/input/dev.spacy
         description: "dev data"
       c:
         type: "file"
         format: "spaCy DocBin"
-        content: "Named Entity Recognition gold data" 
+        content: "Named entity recognition gold data" 
         path: /veld/input/eval.spacy
         description: "eval data"
     output:
       a:
+        type: "folder"
+        format: "spaCy model"
+        content: "NLP model"
         path: /veld/output/a/
-        format: "spacy model"
-        content:
-          - "NLP model"
-          - "Machine learning model"
       b:
-        path: /veld/output/b/
+        type: "file"
         format: "txt"
         content: "log"
-        description: "folder for the two log file: train.log and eval.log"
+        path: /veld/output/train.log
+      c:
+        type: "file"
+        format: "txt"
+        content: "log"
+        path: /veld/output/eval.log
 
 services:
   veld:
@@ -44,7 +49,7 @@ services:
       - ./:/veld/executable/
     command: >
       bash -c "
-      python -m spacy train /veld/executable/config3.cfg --paths.train /veld/input/train.spacy --paths.dev /veld/input/dev.spacy --output /veld/output/a/ |& tee /veld/output/b/train.log
-      && python -m spacy evaluate /veld/output/a/model-best/ /veld/input/eval.spacy |& tee /veld/output/b/eval.log
+      python -m spacy train /veld/executable/config3.cfg --paths.train /veld/input/train.spacy --paths.dev /veld/input/dev.spacy --output /veld/output/a/ |& tee /veld/output/train.log
+      && python -m spacy evaluate /veld/output/a/model-best/ /veld/input/eval.spacy |& tee /veld/output/eval.log
       "
 
