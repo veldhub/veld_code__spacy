@@ -2,13 +2,28 @@ x-veld:
   executable:
     about:
       description: "A NER trainig setup, utilizing spacy3's config system."
-      scope:
+      topic:
         - "NLP"
         - "Machine Learning"
     input:
-      path: /veld/input/
-      format: "spacy DocBin"
-      description: "expecting files: train.spacy, dev.spacy, eval.spacy."
+      a:
+        type: "files"
+        format: "spaCy DocBin"
+        content: "Named Entity Recognition gold data" 
+        path: /veld/input/train.spacy
+        description: "train data"
+      b:
+        type: "files"
+        format: "spaCy DocBin"
+        content: "Named Entity Recognition gold data" 
+        path: /veld/input/dev.spacy
+        description: "dev data"
+      c:
+        type: "files"
+        format: "spaCy DocBin"
+        content: "Named Entity Recognition gold data" 
+        path: /veld/input/eval.spacy
+        description: "eval data"
     output:
       a:
         path: /veld/output/a/
