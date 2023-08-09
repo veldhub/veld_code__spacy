@@ -6,19 +6,18 @@ x-veld:
         - "NLP"
         - "Machine Learning"
     input:
-      "1":
-        path: /veld/input/
-        format: "spacy DocBin"
-        description: "expecting files: train.spacy, dev.spacy, eval.spacy."
+      path: /veld/input/
+      format: "spacy DocBin"
+      description: "expecting files: train.spacy, dev.spacy, eval.spacy."
     output:
-      "1":
-        path: /veld/output/1/
+      a:
+        path: /veld/output/a/
         format: "spacy model"
         kind:
           - "NLP model"
           - "Machine Learning model"
-      "2":
-        path: /veld/output/2/
+      b:
+        path: /veld/output/b/
         format: "txt"
         kind: "log"
         description: "folder for the two log files: train.log and eval.log"
@@ -30,7 +29,7 @@ services:
       - ./:/veld/executable/
     command: >
       bash -c "
-      python -m spacy train /veld/executable/config3.cfg --paths.train /veld/input/train.spacy --paths.dev /veld/input/dev.spacy --output /veld/output/1/ |& tee /veld/output/2/train.log
-      && python -m spacy evaluate /veld/output/1/model-best/ /veld/input/eval.spacy |& tee /veld/output/2/eval.log
+      python -m spacy train /veld/executable/config3.cfg --paths.train /veld/input/train.spacy --paths.dev /veld/input/dev.spacy --output /veld/output/a/ |& tee /veld/output/b/train.log
+      && python -m spacy evaluate /veld/output/a/model-best/ /veld/input/eval.spacy |& tee /veld/output/b/eval.log
       "
 
