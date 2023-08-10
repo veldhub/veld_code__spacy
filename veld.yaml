@@ -7,36 +7,36 @@ x-veld:
         - "Machine learning"
         - "Named entity recognition"
     input:
-      a:
+      -
         type: "file"
         format: "spaCy DocBin"
         content: "Named entity recognition gold data" 
         path: /veld/input/train.spacy
         description: "train data"
-      b:
+      -
         type: "file"
         format: "spaCy DocBin"
         content: "Named entity recognition gold data" 
         path: /veld/input/dev.spacy
         description: "dev data"
-      c:
+      -
         type: "file"
         format: "spaCy DocBin"
         content: "Named entity recognition gold data" 
         path: /veld/input/eval.spacy
         description: "eval data"
     output:
-      a:
+      -
         type: "folder"
         format: "spaCy model"
         content: "NLP model"
         path: /veld/output/a/
-      b:
+      -
         type: "file"
         format: "txt"
         content: "log"
         path: /veld/output/train.log
-      c:
+      -
         type: "file"
         format: "txt"
         content: "log"
