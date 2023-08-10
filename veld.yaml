@@ -30,7 +30,7 @@ x-veld:
         type: "folder"
         format: "spaCy model"
         content: "NLP model"
-        path: /veld/output/a/
+        path: /veld/output/model/
       -
         type: "file"
         format: "txt"
@@ -46,10 +46,5 @@ services:
   veld:
     build: .
     volumes:
-      - ./:/veld/executable/
-    command: >
-      bash -c "
-      python -m spacy train /veld/executable/config3.cfg --paths.train /veld/input/train.spacy --paths.dev /veld/input/dev.spacy --output /veld/output/a/ |& tee /veld/output/train.log
-      && python -m spacy evaluate /veld/output/a/model-best/ /veld/input/eval.spacy |& tee /veld/output/eval.log
-      "
-
+      - ./src/:/veld/executable/
+    command: bash /veld/executable/train.sh
