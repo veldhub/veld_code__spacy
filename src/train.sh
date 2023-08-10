@@ -1,5 +1,5 @@
 
-python -m spacy train $config \
+python -m spacy train /veld/executable/$config \
   --paths.train /veld/input/train.spacy \
   --paths.dev /veld/input/dev.spacy \
   --output /veld/output/model/ \
