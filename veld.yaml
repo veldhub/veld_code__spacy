@@ -1,5 +1,5 @@
 x-veld:
-  executable:
+  code:
     about:
       description: "A NER trainig setup, utilizing spaCy3's config system."
       topic:
@@ -46,5 +46,5 @@ services:
   veld:
     build: .
     volumes:
-      - ./src/:/veld/executable/
-    command: bash /veld/executable/train.sh
+      - ./src/:/veld/code/
+    command: bash /veld/code/train.sh
