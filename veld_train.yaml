@@ -1,47 +1,61 @@
 x-veld:
   code:
-    # TODO: Shouldn't there be a spacy training config as input somehwere?
     about:
       description: "A NER trainig setup, utilizing spaCy3's config system."
       topics:
         - "NLP"
         - "Machine learning"
         - "Named entity recognition"
+
     inputs:
-      -
-        file_formats: "spacy docbin"
-        contents: "NER gold data" 
-        path: /veld/input/train.spacy
-        description: "train data"
-      -
-        file_formats: "spacy docbin"
-        contents: "NER gold data" 
-        path: /veld/input/dev.spacy
-        description: "dev data"
-      -
-        file_formats: "spacy docbin"
-        contents: "NER gold data" 
-        path: /veld/input/eval.spacy
-        description: "eval data"
+      volume: /veld/input/
+      file_formats: "spacy docbin"
+      contents: "NER gold data"
+
     outputs:
-      -
-        file_formats: "spacy model"
-        contents:
-          - "NLP model"
-          - "NER model"
-        path: /veld/output/model/
-      -
-        file_formats: "txt"
-        contents: "logging"
-        path: /veld/output/train.log
-      -
-        file_formats: "txt"
-        contents: "logging"
-        path: /veld/output/eval.log
+      volume: /veld/output/
+      file_formats: "spacy model"
+      contents:
+        - "NLP model"
+        - "NER model"
+
+    environment:
+      input_spacy_docbin_train:
+        description: "path to the train spacy docbin file"
+        type: path
+        path_prefix: "/veld/input/"
+      input_spacy_docbin_dev:
+        description: "path to the dev spacy docbin file"
+        type: path
+        path_prefix: "/veld/input/"
+      input_spacy_docbin_eval:
+        description: "path to the eval spacy docbin file"
+        type: path
+        path_prefix: "/veld/input/"
+      output_model_path:
+        description: "path to the spacy model"
+        type: path
+        path_prefix: "/veld/output/"
+      output_train_log_path:
+        description: "path to the train log file"
+        type: path
+        path_prefix: "/veld/output/"
+      output_eval_log_path:
+        description: "path to the eval log file"
+        type: path
+        path_prefix: "/veld/output/"
 
 services:
-  veld:
+  veld_train:
     build: .
+    working_dir: /veld/code/
     command: bash /veld/code/train.sh
     volumes:
-      - ./src/:/veld/code/
+      - ./src/train/:/veld/code/
+    environment:
+      input_spacy_docbin_train: null
+      input_spacy_docbin_dev: null
+      input_spacy_docbin_eval: null
+      output_model_path: null
+      output_train_log_path: null
+      output_eval_log_path: null
