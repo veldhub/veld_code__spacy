@@ -1,0 +1,63 @@
+x-veld:
+  code:
+    about:
+      description: "prepare data for spacy NER training, since spacy expects the entity annotation
+        indices to be precisely at the beginning and end of the words, and also no overlapping
+        entity annotations. Then it converts the data to spaCy docbin, and prepares it for training
+        by splitting it into train, dev, eval subsets, and shuffling them randomly."
+      topics:
+        - "ETL"
+        - "NLP"
+        - "Machine learning"
+
+    inputs:
+      volume: /veld/input/
+      file_formats: "json"
+      contents: "NER gold data"
+
+    outputs:
+      volume: /veld/output/
+      file_formats: "spacy docbin"
+      contents: "NER gold data"
+
+    environment:
+      input_json_path:
+        description: "path to csv file, containing NER gold data"
+        type: path
+        path_prefix: "/veld/input/"
+      output_spacy_docbin_folder:
+        description: "path to spacy docbin file, containing NER gold data and spacy nlp data"
+        type: path
+        path_prefix: "/veld/output/"
+      percentage_train:
+        description: "percentage of data allocated to training set"
+        type: int
+        default: 80
+      percentage_dev:
+        description: "percentage of data allocated to dev set"
+        type: int
+        default: 10
+      percentage_eval:
+        description: "percentage of data allocated to eval set"
+        type: int
+        default: 10
+      seed:
+        description: "seed for initial random shuffling of training data"
+        type: int
+        default: 42
+
+services:
+  veld_convert:
+    build: .
+    #command: bash -c "python /veld/code/convert.py |& tee /veld/output/convert.log"
+    command: python /veld/code/convert.py
+    volumes:
+      - ./src/convert/:/veld/code/
+    environment:
+      input_json_path:
+      output_spacy_docbin_folder:
+      percentage_train: 80
+      percentage_dev: 10
+      percentage_eval: 10
+      seed: 42
+
