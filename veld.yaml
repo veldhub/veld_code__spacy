@@ -1,50 +1,47 @@
 x-veld:
   code:
+    # TODO: Shouldn't there be a spacy training config as input somehwere?
     about:
       description: "A NER trainig setup, utilizing spaCy3's config system."
-      topic:
+      topics:
         - "NLP"
         - "Machine learning"
         - "Named entity recognition"
-    input:
+    inputs:
       -
-        type: "file"
-        format: "spaCy DocBin"
-        content: "Named entity recognition gold data" 
+        file_formats: "spacy docbin"
+        contents: "NER gold data" 
         path: /veld/input/train.spacy
         description: "train data"
       -
-        type: "file"
-        format: "spaCy DocBin"
-        content: "Named entity recognition gold data" 
+        file_formats: "spacy docbin"
+        contents: "NER gold data" 
         path: /veld/input/dev.spacy
         description: "dev data"
       -
-        type: "file"
-        format: "spaCy DocBin"
-        content: "Named entity recognition gold data" 
+        file_formats: "spacy docbin"
+        contents: "NER gold data" 
         path: /veld/input/eval.spacy
         description: "eval data"
-    output:
+    outputs:
       -
-        type: "folder"
-        format: "spaCy model"
-        content: "NLP model"
+        file_formats: "spacy model"
+        contents:
+          - "NLP model"
+          - "NER model"
         path: /veld/output/model/
       -
-        type: "file"
-        format: "txt"
-        content: "log"
+        file_formats: "txt"
+        contents: "logging"
         path: /veld/output/train.log
       -
-        type: "file"
-        format: "txt"
-        content: "log"
+        file_formats: "txt"
+        contents: "logging"
         path: /veld/output/eval.log
 
 services:
   veld:
     build: .
+    command: bash /veld/code/train.sh
     volumes:
       - ./src/:/veld/code/
-    command: bash /veld/code/train.sh
