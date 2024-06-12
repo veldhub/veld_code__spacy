@@ -1,7 +1,7 @@
 x-veld:
   code:
     about:
-      description: "A NER trainig setup, utilizing spaCy3's config system."
+      description: "A NER trainig setup, utilizing spaCy 3's config system."
       topics:
         - "NLP"
         - "Machine learning"
@@ -10,40 +10,38 @@ x-veld:
     inputs:
       volume: /veld/input/
       file_formats: "spacy docbin"
-      contents: "NER gold data"
 
     outputs:
       volume: /veld/output/
-      file_formats: "spacy model"
+      file_formats: 
+        - "spacy model"
+        - "txt"
       contents:
         - "NLP model"
-        - "NER model"
+        - "log file"
 
     environment:
-      input_spacy_docbin_train:
-        description: "path to the train spacy docbin file"
-        type: path
-        path_prefix: "/veld/input/"
-      input_spacy_docbin_dev:
-        description: "path to the dev spacy docbin file"
-        type: path
-        path_prefix: "/veld/input/"
-      input_spacy_docbin_eval:
-        description: "path to the eval spacy docbin file"
-        type: path
-        path_prefix: "/veld/input/"
-      output_model_path:
+      in_train_docbin_file:
+        type: file
+        volume: /veld/input/
+      in_dev_docbin_file:
+        type: file
+        volume: /veld/input/
+      in_eval_docbin_file:
+        type: file
+        volume: /veld/input/
+      out_model_folder:
         description: "path to the spacy model"
-        type: path
-        path_prefix: "/veld/output/"
-      output_train_log_path:
+        type: folder
+        volume: /veld/output/
+      out_train_log_file:
         description: "path to the train log file"
-        type: path
-        path_prefix: "/veld/output/"
-      output_eval_log_path:
+        type: file
+        volume: /veld/output/
+      out_eval_log_file:
         description: "path to the eval log file"
-        type: path
-        path_prefix: "/veld/output/"
+        type: file
+        volume: /veld/output/
 
 services:
   veld_train:
@@ -53,9 +51,10 @@ services:
     volumes:
       - ./src/train/:/veld/code/
     environment:
-      input_spacy_docbin_train: null
-      input_spacy_docbin_dev: null
-      input_spacy_docbin_eval: null
-      output_model_path: null
-      output_train_log_path: null
-      output_eval_log_path: null
+      in_train_docbin_file: null
+      in_dev_docbin_file: null
+      in_eval_docbin_file: null
+      out_model_file: null
+      out_train_log_file: null
+      out_eval_log_file: null
+

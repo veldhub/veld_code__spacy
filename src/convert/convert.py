@@ -5,8 +5,8 @@ import random
 import spacy
 from spacy.tokens import Span, DocBin
 
-INPUT_JSON_PATH = os.getenv("input_json_path")
-OUTPUT_SPACY_DOCBIN_FOLDER = os.getenv("output_spacy_docbin_folder")
+IN_JSON_FILE = "/veld/input/" + os.getenv("in_json_file")
+OUTPUT_SPACY_DOCBIN_FOLDER = "/veld/output/"
 PERCENTAGE_TRAIN = os.getenv("percentage_train")
 PERCENTAGE_DEV = os.getenv("percentage_dev")
 PERCENTAGE_EVAL = os.getenv("percentage_eval")
@@ -34,7 +34,7 @@ def parse_env_vars():
     
 def read_gold_data(perc_train, perc_dev, perc_eval, seed):
     random.seed(seed)
-    with open(INPUT_JSON_PATH, "r") as f:
+    with open(IN_JSON_FILE, "r") as f:
         gd_list = json.load(f)
     random.shuffle(gd_list)
     len_total = len(gd_list)

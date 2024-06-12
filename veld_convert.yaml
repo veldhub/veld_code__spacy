@@ -17,18 +17,16 @@ x-veld:
 
     outputs:
       volume: /veld/output/
+      output_spacy_docbin_folder:
+      description: "path to spacy docbin file, containing NER gold data and spacy nlp data"
       file_formats: "spacy docbin"
       contents: "NER gold data"
 
     environment:
-      input_json_path:
+      in_json_file:
         description: "path to csv file, containing NER gold data"
-        type: path
-        path_prefix: "/veld/input/"
-      output_spacy_docbin_folder:
-        description: "path to spacy docbin file, containing NER gold data and spacy nlp data"
-        type: path
-        path_prefix: "/veld/output/"
+        type: file
+        volume: /veld/input/
       percentage_train:
         description: "percentage of data allocated to training set"
         type: int
@@ -54,8 +52,8 @@ services:
     volumes:
       - ./src/convert/:/veld/code/
     environment:
-      input_json_path:
-      output_spacy_docbin_folder:
+      in_json_file: null
+      output_spacy_docbin_folder: null
       percentage_train: 80
       percentage_dev: 10
       percentage_eval: 10

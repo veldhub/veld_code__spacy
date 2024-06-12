@@ -1,13 +1,22 @@
 #!/bin/bash
 
+
+in_train_docbin_file="/veld/input/${in_train_docbin_file}"
+in_dev_docbin_file="/veld/input/${in_dev_docbin_file}"
+in_eval_docbin_file="/veld/input/${in_eval_docbin_file}"
+out_model_folder="/veld/output/${out_model_folder}"
+out_train_log_file="/veld/output/${out_train_log_file}"
+out_eval_log_file="/veld/output/${out_eval_log_file}"
+
+
 python -m spacy train /veld/code/config2.cfg \
-  --paths.train "$input_spacy_docbin_train" \
-  --paths.dev "$input_spacy_docbin_dev" \
-  --output "$output_model_path" \
-  |& tee "$output_train_log_path"
+  --paths.train "$in_train_docbin_file" \
+  --paths.dev "$in_dev_docbin_file" \
+  --output "$out_model_folder" \
+  |& tee "$out_train_log_file"
 
 python -m spacy evaluate \
-  "${output_model_path}/model-best/" \
-  "$input_spacy_docbin_eval" \
-  |& tee "$output_eval_log_path"
+  "${out_model_folder}/model-best/" \
+  "$in_eval_docbin_file" \
+  |& tee "$out_eval_log_file"
 
