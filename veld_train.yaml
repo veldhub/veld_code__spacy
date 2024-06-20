@@ -50,6 +50,8 @@ services:
     command: bash /veld/code/train.sh
     volumes:
       - ./src/train/:/veld/code/
+      - ./data/docbin/:/veld/input/
+      - ./data/model/:/veld/output/
     environment:
       in_train_docbin_file: null
       in_dev_docbin_file: null
