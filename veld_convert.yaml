@@ -1,47 +1,44 @@
 x-veld:
   code:
-    about:
-      description: "prepare data for spacy NER training, since spacy expects the entity annotation
-        indices to be precisely at the beginning and end of the words, and also no overlapping
-        entity annotations. Then it converts the data to spaCy docbin, and prepares it for training
-        by splitting it into train, dev, eval subsets, and shuffling them randomly."
-      topics:
-        - "ETL"
-        - "NLP"
-        - "Machine learning"
+    description: "prepare data for spacy NER training, since spacy expects the entity annotation
+      indices to be precisely at the beginning and end of the words, and also no overlapping
+      entity annotations. Then it converts the data to spaCy docbin, and prepares it for training
+      by splitting it into train, dev, eval subsets, and shuffling them randomly."
+    topics:
+      - "ETL"
+      - "NLP"
+      - "Machine learning"
 
     inputs:
-      volume: /veld/input/
-      file_formats: "json"
-      contents: "NER gold data"
+      - volume: /veld/input/
+        file_type: "json"
+        description: "path to csv file, containing NER gold data"
+        environment: in_json_file
+        contents: "NER gold data"
 
     outputs:
-      volume: /veld/output/
-      output_spacy_docbin_folder:
-      description: "path to spacy docbin file, containing NER gold data and spacy nlp data"
-      file_formats: "spacy docbin"
-      contents: "NER gold data"
+      - volume: /veld/output/
+        environment: output_spacy_docbin_folder
+        description: "path to spacy docbin file, containing NER gold data and spacy nlp data"
+        file_type: "spacy docbin"
+        contents: "NER gold data"
 
-    environment:
-      in_json_file:
-        description: "path to csv file, containing NER gold data"
-        type: file
-        volume: /veld/input/
-      percentage_train:
+    settings:
+      - environment: percentage_train
         description: "percentage of data allocated to training set"
-        type: int
+        env_type: "int"
         default: 80
-      percentage_dev:
+      - environment: percentage_dev
         description: "percentage of data allocated to dev set"
-        type: int
+        env_type: "int"
         default: 10
-      percentage_eval:
+      - environment: percentage_eval
         description: "percentage of data allocated to eval set"
-        type: int
+        env_type: "int"
         default: 10
-      seed:
+      - environment: seed
         description: "seed for initial random shuffling of training data"
-        type: int
+        env_type: "int"
         default: 42
 
 services:

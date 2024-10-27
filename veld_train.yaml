@@ -1,47 +1,41 @@
 x-veld:
   code:
-    about:
-      description: "A NER trainig setup, utilizing spaCy 3's config system."
-      topics:
-        - "NLP"
-        - "Machine learning"
-        - "Named entity recognition"
+    description: "A NER trainig setup, utilizing spaCy 3's config system."
+    topics:
+      - "NLP"
+      - "Machine learning"
+      - "Named entity recognition"
 
     inputs:
-      volume: /veld/input/
-      file_formats: "spacy docbin"
+      - volume: /veld/input/
+        file_type: "spacy docbin"
+        environment: in_train_docbin_file
+        contents: "NER gold data"
+      - volume: /veld/input/
+        file_type: "spacy docbin"
+        environment: in_dev_docbin_file
+        contents: "NER gold data"
+      - volume: /veld/input/
+        file_type: "spacy docbin"
+        environment: in_eval_docbin_file
+        contents: "NER gold data"
 
     outputs:
-      volume: /veld/output/
-      file_formats: 
-        - "spacy model"
-        - "txt"
-      contents:
-        - "NLP model"
-        - "log file"
-
-    environment:
-      in_train_docbin_file:
-        type: file
-        volume: /veld/input/
-      in_dev_docbin_file:
-        type: file
-        volume: /veld/input/
-      in_eval_docbin_file:
-        type: file
-        volume: /veld/input/
-      out_model_folder:
+      - volume: /veld/output/
+        file_type: "spacy model"
+        environment: out_model_folder
         description: "path to the spacy model"
-        type: folder
-        volume: /veld/output/
-      out_train_log_file:
+        contents: "NLP model"
+      - volume: /veld/output/
+        file_type: "txt"
+        environment: out_train_log_file
         description: "path to the train log file"
-        type: file
-        volume: /veld/output/
-      out_eval_log_file:
+        contents: "logs"
+      - volume: /veld/output/
+        file_type: "txt"
+        environment: out_eval_log_file
         description: "path to the eval log file"
-        type: file
-        volume: /veld/output/
+        contents: "logs"
 
 services:
   veld_train:
