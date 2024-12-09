@@ -42,13 +42,19 @@ x-veld:
         description: "path to the eval log file"
         contents: "logs"
 
+    settings:
+      - environment: model_base
+        description: "spacy model to be used for downstream training."
+        env_type: str
+
 services:
   veld_train:
     build: .
     working_dir: /veld/code/
-    command: bash /veld/code/train.sh
+    command: /veld/code/train.sh
     volumes:
       - ./src/:/veld/code/
+      - ./data/models_base_cache/:/tmp/models_base_cache/
       - ./data/docbin/:/veld/input/docbin/
       - ./data/config/:/veld/input/config/
       - ./data/model/:/veld/output/
@@ -56,6 +62,7 @@ services:
       in_train_docbin_file: null
       in_dev_docbin_file: null
       in_eval_docbin_file: null
+      model_base: null
       out_train_log_file: null
       out_eval_log_file: null
 
