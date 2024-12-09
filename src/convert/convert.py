@@ -1,23 +1,44 @@
 import json
+import logging
 import os
 import random
 
 import spacy
+from spacy.cli import download
 from spacy.tokens import Span, DocBin
 
-IN_JSON_FILE = "/veld/input/" + os.getenv("in_json_file")
-OUTPUT_SPACY_DOCBIN_FOLDER = "/veld/output/"
+
+IN_JSON_FILE = os.getenv("in_json_file")
+if IN_JSON_FILE is None:
+    raise Exception("parameter 'in_json_file' is missing")
+IN_JSON_FILE = "/veld/input/" + IN_JSON_FILE
+OUT_SPACY_DOCBIN_FOLDER = "/veld/output/docbin/"
+OUT_LOG_FILE = os.getenv("out_log_file")
+if OUT_LOG_FILE is None:
+    raise Exception("parameter 'out_log_file' is missing")
+OUT_LOG_FILE = "/veld/output/log/" + OUT_LOG_FILE
+MODEL_TO_DOWNLOAD = os.getenv("model_to_download")
+if MODEL_TO_DOWNLOAD is None:
+    raise Exception("parameter 'model_to_download' is missing")
 PERCENTAGE_TRAIN = os.getenv("percentage_train")
 PERCENTAGE_DEV = os.getenv("percentage_dev")
 PERCENTAGE_EVAL = os.getenv("percentage_eval")
 SEED = os.getenv("seed")
-log_content = ""
+
+
+if os.path.exists(OUT_LOG_FILE):
+    os.remove(OUT_LOG_FILE)
+logging.basicConfig(
+    filename=OUT_LOG_FILE,
+    level=logging.INFO,
+    format="%(asctime)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 
 def print_and_log(msg):
     print(msg)
-    global log_content
-    log_content += msg + "\n"
+    logging.info(msg)
 
 
 def parse_env_vars():
@@ -71,11 +92,14 @@ def merge_overlapping(gd_list):
                     else:
                         ent_correct = (ent_a[0], ent_b[1], ent_a[2])
                     print_and_log(
-                        f"Found overlap between: {ent_a}, and {ent_b}, merged into {ent_correct}."
+                        f"Found overlap between: (subtext: {gd['text_raw'][ent_a[0]:ent_a[1]]},"
+                        f" ent: {ent_a}), and (subtext: {gd['text_raw'][ent_b[0]:ent_b[1]]}, ent:"
+                        f" {ent_b}); merged into {ent_correct}."
                     )
                     if ent_a[2] != ent_b[2]:
                         print_and_log(
-                            f"Found conflicting entities: '{ent_a[2]}' and: '{ent_b[2]}'."
+                            f"Found conflicting entities at subtext:"
+                            f" {gd['text_raw'][ent_a[0]:ent_a[1]]}, '{ent_a[2]}' and: '{ent_b[2]}'."
                             f" Took the first one: '{ent_correct[2]}'"
                         )
                     i += 1
@@ -171,18 +195,24 @@ def convert_to_docbin(gd_list, nlp):
     
 
 def main():
+    try:
+        nlp = spacy.load("/tmp/models_cache/" + MODEL_TO_DOWNLOAD)
+        print_and_log(f"loaded model {MODEL_TO_DOWNLOAD} from cache.")
+    except OSError:
+        print_and_log(f"no model {MODEL_TO_DOWNLOAD} in cache. Downloading.")
+        download(MODEL_TO_DOWNLOAD)
+        nlp = spacy.load(MODEL_TO_DOWNLOAD)
+        nlp.to_disk("/tmp/models_cache/" + MODEL_TO_DOWNLOAD)
+        nlp = spacy.load("/tmp/models_cache/" + MODEL_TO_DOWNLOAD)
     perc_train, perc_dev, perc_eval, seed = parse_env_vars()
     gd_all = read_gold_data(perc_train, perc_dev, perc_eval, seed)
-    nlp = spacy.load("de_dep_news_trf")
     for gd_name, gd_list in gd_all.items():
         print_and_log(f"####################### converting {gd_name} data")
         gd_list = merge_overlapping(gd_list)
         docbin = convert_to_docbin(gd_list, nlp)
-        docbin.to_disk(f"{OUTPUT_SPACY_DOCBIN_FOLDER}/{gd_name}.spacy")
-    with open(OUTPUT_SPACY_DOCBIN_FOLDER + "/conversion.log", "w" ) as f:
-        f.write(log_content)
+        docbin.to_disk(f"{OUT_SPACY_DOCBIN_FOLDER}/{gd_name}.spacy")
     
 
 if __name__ == "__main__":
     main()
-    
+
