@@ -2,8 +2,6 @@
 #
 # this script is run as docker entrypoint, ensuring that spacy models are available and cached
 
-echo "$model_base"
-
 if [ -e /tmp/models_base_cache/"$model_base" ]; then
   echo "found ${model_base} in /tmp/models_base_cache/ , using that."
 else
