@@ -7,25 +7,30 @@ x-veld:
       - "Named entity recognition"
 
     inputs:
-      - volume: /veld/input/
+      - volume: /veld/input/docbin/
         file_type: "spacy docbin"
         environment: in_train_docbin_file
         contents: "NER gold data"
-      - volume: /veld/input/
+      - volume: /veld/input/docbin/
         file_type: "spacy docbin"
         environment: in_dev_docbin_file
         contents: "NER gold data"
-      - volume: /veld/input/
+      - volume: /veld/input/docbin/
         file_type: "spacy docbin"
         environment: in_eval_docbin_file
         contents: "NER gold data"
+      - volume: /veld/input/config/
+        file_type: "cfg"
+        environment: in_spacy_config
+        contents: "spacy training config"
+        description: "See https://spacy.io/usage/training/#config"
 
     outputs:
       - volume: /veld/output/
         file_type: "spacy model"
-        environment: out_model_folder
-        description: "path to the spacy model"
-        contents: "NLP model"
+        contents: 
+          - "NLP model"
+          - "spacy model"
       - volume: /veld/output/
         file_type: "txt"
         environment: out_train_log_file
@@ -43,14 +48,14 @@ services:
     working_dir: /veld/code/
     command: bash /veld/code/train.sh
     volumes:
-      - ./src/train/:/veld/code/
-      - ./data/docbin/:/veld/input/
+      - ./src/:/veld/code/
+      - ./data/docbin/:/veld/input/docbin/
+      - ./data/config/:/veld/input/config/
       - ./data/model/:/veld/output/
     environment:
       in_train_docbin_file: null
       in_dev_docbin_file: null
       in_eval_docbin_file: null
-      out_model_file: null
       out_train_log_file: null
       out_eval_log_file: null
 
