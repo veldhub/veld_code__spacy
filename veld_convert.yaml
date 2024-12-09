@@ -55,7 +55,7 @@ services:
     command: python /veld/code/convert.py
     #command: bash -c 'ls /root/ && touch /root/bla && ls /root/'
     volumes:
-      - ./src/convert/:/veld/code/
+      - ./src/convert.py:/veld/code/convert.py
       - ./data/models_downloaded_cache/:/tmp/models_cache/
       - ./data/training_data_json/:/veld/input/
       - ./data/docbin/:/veld/output/docbin/
