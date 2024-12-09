@@ -1,0 +1,34 @@
+x-veld:
+  code:
+    description: "A NER trainig setup, utilizing spaCy 3's config system."
+    topics:
+      - "NLP"
+      - "Machine learning"
+      - "Named entity recognition"
+
+
+    outputs:
+      - volume: /veld/output/
+        file_type: "spacy model"
+        contents: 
+          - "NLP model"
+          - "spacy model"
+
+    settings:
+      - environment: model_base
+        description: "spacy model to be used for downstream training."
+        env_type: str
+
+services:
+  veld_create_config:
+    build: .
+    working_dir: /veld/code/
+    command: /veld/code/create_config.sh
+    volumes:
+      - ./src/:/veld/code/
+      - ./data/models_base_cache/:/tmp/models_base_cache/
+      - ./data/configs/:/veld/output/
+    environment:
+      model_base: null
+      out_config_file: null
+
