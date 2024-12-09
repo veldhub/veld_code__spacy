@@ -29,7 +29,7 @@ x-veld:
         contents: "NER gold data"
 
     settings:
-      - environment: model_to_download
+      - environment: model_base
         description: "spacy model to be used for conversion."
         env_type: str
       - environment: percentage_train
@@ -55,15 +55,15 @@ services:
     command: python /veld/code/convert.py
     #command: bash -c 'ls /root/ && touch /root/bla && ls /root/'
     volumes:
-      - ./src/convert.py:/veld/code/convert.py
-      - ./data/models_downloaded_cache/:/tmp/models_cache/
+      - ./src/:/veld/code/
+      - ./data/models_base_cache/:/tmp/models_base_cache/
       - ./data/training_data_json/:/veld/input/
       - ./data/docbin/:/veld/output/docbin/
       - ./:/veld/output/log/
     environment:
       in_json_file: null
       out_log_file: null
-      model_to_download: null
+      model_base: null
       percentage_train: 80
       percentage_dev: 10
       percentage_eval: 10

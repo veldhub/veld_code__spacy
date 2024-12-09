@@ -17,13 +17,14 @@ OUT_LOG_FILE = os.getenv("out_log_file")
 if OUT_LOG_FILE is None:
     raise Exception("parameter 'out_log_file' is missing")
 OUT_LOG_FILE = "/veld/output/log/" + OUT_LOG_FILE
-MODEL_TO_DOWNLOAD = os.getenv("model_to_download")
-if MODEL_TO_DOWNLOAD is None:
-    raise Exception("parameter 'model_to_download' is missing")
+MODEL_BASE = os.getenv("model_base")
+if MODEL_BASE is None:
+    raise Exception("parameter 'model_base' is missing")
 PERCENTAGE_TRAIN = os.getenv("percentage_train")
 PERCENTAGE_DEV = os.getenv("percentage_dev")
 PERCENTAGE_EVAL = os.getenv("percentage_eval")
 SEED = os.getenv("seed")
+nlp = spacy.load(MODEL_BASE)
 
 
 if os.path.exists(OUT_LOG_FILE):
@@ -109,7 +110,7 @@ def merge_overlapping(gd_list):
         gd["entities"] = ent_list_new
     return gd_list
     
-def convert_to_docbin(gd_list, nlp):
+def convert_to_docbin(gd_list):
     
     def align_tokens(gd):
         text = gd["text_raw"]
@@ -190,21 +191,12 @@ def convert_to_docbin(gd_list, nlp):
     
 
 def main():
-    try:
-        nlp = spacy.load("/tmp/models_cache/" + MODEL_TO_DOWNLOAD)
-        print_and_log(f"loaded model {MODEL_TO_DOWNLOAD} from cache.")
-    except OSError:
-        print_and_log(f"no model {MODEL_TO_DOWNLOAD} in cache. Downloading.")
-        download(MODEL_TO_DOWNLOAD)
-        nlp = spacy.load(MODEL_TO_DOWNLOAD)
-        nlp.to_disk("/tmp/models_cache/" + MODEL_TO_DOWNLOAD)
-        nlp = spacy.load("/tmp/models_cache/" + MODEL_TO_DOWNLOAD)
     perc_train, perc_dev, perc_eval, seed = parse_env_vars()
     gd_all = read_gold_data(perc_train, perc_dev, perc_eval, seed)
     for gd_name, gd_list in gd_all.items():
         print_and_log(f"####################### converting {gd_name} data")
         gd_list = merge_overlapping(gd_list)
-        docbin = convert_to_docbin(gd_list, nlp)
+        docbin = convert_to_docbin(gd_list)
         docbin.to_disk(f"{OUT_SPACY_DOCBIN_FOLDER}/{gd_name}.spacy")
     
 
