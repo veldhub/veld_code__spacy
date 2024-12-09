@@ -28,12 +28,7 @@ SEED = os.getenv("seed")
 
 if os.path.exists(OUT_LOG_FILE):
     os.remove(OUT_LOG_FILE)
-logging.basicConfig(
-    filename=OUT_LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s: %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
+logging.basicConfig(filename=OUT_LOG_FILE, level=logging.INFO)
 
 
 def print_and_log(msg):
