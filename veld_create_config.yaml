@@ -1,23 +1,119 @@
 x-veld:
   code:
-    description: "A NER trainig setup, utilizing spaCy 3's config system."
+    description: "Creating a spacy config by encapsulating `init config` ( 
+      https://spacy.io/api/cli#init-config ) and `init fill-config` ( 
+      https://spacy.io/api/cli#init-fill-config ) . The output is ai config file used for training; 
+      see more here: https://spacy.io/usage/training/#config"
     topics:
       - "NLP"
       - "Machine learning"
-      - "Named entity recognition"
-
 
     outputs:
       - volume: /veld/output/
-        file_type: "spacy model"
-        contents: 
-          - "NLP model"
-          - "spacy model"
+        file_type: "cfg"
+        environment: out_spacy_config
+        contents: "spacy training config"
+        description: "See https://spacy.io/usage/training/#config"
 
     settings:
-      - environment: model_base
-        description: "spacy model to be used for downstream training."
+      - environment: lang
+        description: "See https://spacy.io/api/cli#init-config"
         env_type: str
+      - environment: tagger
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: parser
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: ner
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: entity_linker
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: entity_ruler
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: textcat
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: textcat_multilabel
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: lemmatizer
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: trainable_lemmatizer
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: morphologizer
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: attribute_ruler
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: senter
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: sentencizer
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: tok2vec
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: transformer
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: optimize_efficiency
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: optimize_accuracy
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: gpu
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
+      - environment: pretraining
+        description: "See https://spacy.io/api/cli#init-config"
+        env_type: bool
+        default: false
+        optional: true
 
 services:
   veld_create_config:
@@ -26,9 +122,27 @@ services:
     command: /veld/code/create_config.sh
     volumes:
       - ./src/:/veld/code/
-      - ./data/models_base_cache/:/tmp/models_base_cache/
       - ./data/configs/:/veld/output/
     environment:
-      model_base: null
       out_config_file: null
+      lang: de
+      tagger: false
+      parser: false
+      ner: false
+      entity_linker: false
+      entity_ruler: false
+      textcat: false
+      textcat_multilabel: false
+      lemmatizer: false
+      trainable_lemmatizer: false
+      morphologizer: false
+      attribute_ruler: false
+      senter: false
+      sentencizer: false
+      tok2vec: false
+      transformer: false
+      optimize_efficiency: null
+      optimize_accuracy: null
+      gpu: false
+      pretraining: false
 
