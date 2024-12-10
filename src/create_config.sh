@@ -90,5 +90,12 @@ echo "executing:"
 echo "$command"
 eval "$command"
 
-python -m spacy init fill-config /tmp/base_config.cfg /veld/output/"$out_config_file"
+
+# fill-config
+
+command="python -m spacy init fill-config /tmp/base_config.cfg /veld/output/${out_config_file}"
+
+echo "executing:"
+echo "$command"
+eval "$command"
 
