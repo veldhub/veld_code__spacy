@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 python -m spacy train /veld/input/config/"$in_spacy_config" \
   --paths.train /veld/input/docbin/"$in_train_docbin_file" \
   --paths.dev /veld/input/docbin/"$in_dev_docbin_file" \
