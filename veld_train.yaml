@@ -1,24 +1,32 @@
 x-veld:
   code:
-    description: "A NER trainig setup, utilizing spaCy 3's config system."
+    description: "A spacy trainig setup, utilizing spacy v3's config system."
     topics:
       - "NLP"
       - "Machine learning"
-      - "Named entity recognition"
 
     inputs:
       - volume: /veld/input/docbin/
         file_type: "spacy docbin"
         environment: in_train_docbin_file
-        contents: "NER gold data"
+        contents:
+          - "NLP gold data"
+          - "ML gold data"
+          - "gold data"
       - volume: /veld/input/docbin/
         file_type: "spacy docbin"
         environment: in_dev_docbin_file
-        contents: "NER gold data"
+        contents:
+          - "NLP gold data"
+          - "ML gold data"
+          - "gold data"
       - volume: /veld/input/docbin/
         file_type: "spacy docbin"
         environment: in_eval_docbin_file
-        contents: "NER gold data"
+        contents: 
+          - "NLP gold data"
+          - "ML gold data"
+          - "gold data"
       - volume: /veld/input/config/
         file_type: "cfg"
         environment: in_spacy_config

@@ -18,7 +18,6 @@ veld_metadata = {
             "contents": [
                 "spacy model",
                 "NLP model"
-                "NER model"
             ],
             "additional": spacy_metadata
         }
