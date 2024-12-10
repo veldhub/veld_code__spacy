@@ -10,16 +10,16 @@ from spacy.tokens import Span, DocBin
 
 IN_JSON_FILE = os.getenv("in_json_file")
 if IN_JSON_FILE is None:
-    raise Exception("parameter 'in_json_file' is missing")
+    raise Exception("var 'in_json_file' is missing")
 IN_JSON_FILE = "/veld/input/" + IN_JSON_FILE
 OUT_SPACY_DOCBIN_FOLDER = "/veld/output/docbin/"
 OUT_LOG_FILE = os.getenv("out_log_file")
 if OUT_LOG_FILE is None:
-    raise Exception("parameter 'out_log_file' is missing")
+    raise Exception("var 'out_log_file' is missing")
 OUT_LOG_FILE = "/veld/output/log/" + OUT_LOG_FILE
 MODEL_BASE = os.getenv("model_base")
 if MODEL_BASE is None:
-    raise Exception("parameter 'model_base' is missing")
+    raise Exception("var 'model_base' is missing")
 PERCENTAGE_TRAIN = os.getenv("percentage_train")
 PERCENTAGE_DEV = os.getenv("percentage_dev")
 PERCENTAGE_EVAL = os.getenv("percentage_eval")
