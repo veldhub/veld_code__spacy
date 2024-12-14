@@ -1,10 +1,10 @@
 x-veld:
   code:
-    description: "simple service to push to spacy since that is surprisingly cumbersome and
-      creates redundancies with regards to data model usage. Note that this expects a token in the
-      file ./src/token.txt, use the template ./src/token_template.txt as a copy for your own
-      ./src/token.txt which is never indexed by git."
-    topics: "NLP"
+    description: "simple service to push spacy models to huggingface. IMPORTANT: Only works from 
+      spacy v3.* onwards!"
+    topics:
+      - "NLP"
+      - "ETL"
 
     inputs:
       - volume: /veld/input/
