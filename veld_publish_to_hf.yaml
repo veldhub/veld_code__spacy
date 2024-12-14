@@ -13,12 +13,14 @@ x-veld:
 
     settings:
       - environment: model_name
-        description: "name of the model, to be used for huggingface metadata. Note to not put double
-          underscores into the model name, as this crashes spacy while publishing"
+        description: "name of the model, to be used for huggingface metadata. IMPORTANT: do not put 
+          double underscores into the model name, as this crashes spacy while publishing."
         type: "str"
         optional: true
       - environment: version
-        description: "version of the model, to be used for huggingface metadata."
+        description: "version of the model, to be used for huggingface metadata. IMPORTANT: spacy 
+          crashes when the version tag contains the character `v` in front of numeric+dot version 
+          identifiers: E.g. `v1.1` crashes, while `1.1` works."
         type: "str"
         optional: true
       - environment: hf_token
@@ -33,7 +35,7 @@ x-veld:
 services:
   veld_publish_to_hf:
     build: .
-    command: /veld/code/publish_to_hf.sh
+    command: bash /veld/code/publish_to_hf.sh
     volumes:
       - ./src/:/veld/code/
     environment:
