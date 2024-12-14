@@ -25,9 +25,10 @@ x-veld:
         description: "huggingface authentication token. IMPORTANT: It is advised to not hardcode 
           that directly into the yaml file but rather define the environment variable yourself, 
           before calling this docker compose service. On linux and mac, this can be done with 
-          `export hf_token=<TOKEN>` before launching a docker compose service, or persist it in a 
-          `.env` file next to the chain veld yaml file, where docker compose would load it from 
-          (take care to not commit that to git! Best to add the `.env` to `.gitignore`)."
+          `export hf_token=<TOKEN>` before launching a docker compose service, or persist it in a
+          `.env` (with the content simply being `hf_token=<TOKEN>`) file next to the chain veld 
+          yaml file, where docker compose would load it from (take care to not commit that to git! 
+          Best to add the `.env` to `.gitignore`)."
 
 services:
   veld_publish_to_hf:
