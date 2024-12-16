@@ -15,13 +15,13 @@ x-veld:
       - environment: model_name
         description: "name of the model, to be used for huggingface metadata. IMPORTANT: do not put 
           double underscores into the model name, as this crashes spacy while publishing."
-        type: "str"
+        env_type: "str"
         optional: true
       - environment: version
         description: "version of the model, to be used for huggingface metadata. IMPORTANT: spacy 
           crashes when the version tag contains the character `v` in front of numeric+dot version 
           identifiers: E.g. `v1.1` crashes, while `1.1` works."
-        type: "str"
+        env_type: "str"
         optional: true
       - environment: hf_token
         description: "huggingface authentication token. IMPORTANT: It is advised to not hardcode 
@@ -31,6 +31,7 @@ x-veld:
           `.env` (with the content simply being `hf_token=<TOKEN>`) file next to the chain veld 
           yaml file, where docker compose would load it from (take care to not commit that to git! 
           Best to add the `.env` to `.gitignore`)."
+        env_type: "str"
 
 services:
   veld_publish_to_hf:
