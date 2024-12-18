@@ -35,20 +35,18 @@ x-veld:
 
     output:
       - volume: /veld/output/
-        file_type: "spacy model"
-        content: 
-          - "NLP model"
-          - "spacy model"
+        file_type: "spaCy model"
+        content: "NLP model"
       - volume: /veld/output/
         file_type: "txt"
         environment_var: out_train_log_file
-        description: "path to the train log file"
-        content: "logs"
+        description: "training log file"
+        content: "log"
       - volume: /veld/output/
         file_type: "txt"
         environment_var: out_eval_log_file
-        description: "path to the eval log file"
-        content: "logs"
+        description: "evaluation log file"
+        content: "log"
 
     config:
       - environment_var: model_base
