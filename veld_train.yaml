@@ -1,59 +1,59 @@
 x-veld:
   code:
     description: "A spacy trainig setup, utilizing spacy v3's config system."
-    topics:
+    topic:
       - "NLP"
       - "Machine learning"
 
-    inputs:
+    input:
       - volume: /veld/input/docbin/
         file_type: "spacy docbin"
-        environment: in_train_docbin_file
-        contents:
+        environment_var: in_train_docbin_file
+        content:
           - "NLP gold data"
           - "ML gold data"
           - "gold data"
       - volume: /veld/input/docbin/
         file_type: "spacy docbin"
-        environment: in_dev_docbin_file
-        contents:
+        environment_var: in_dev_docbin_file
+        content:
           - "NLP gold data"
           - "ML gold data"
           - "gold data"
       - volume: /veld/input/docbin/
         file_type: "spacy docbin"
-        environment: in_eval_docbin_file
-        contents: 
+        environment_var: in_eval_docbin_file
+        content: 
           - "NLP gold data"
           - "ML gold data"
           - "gold data"
       - volume: /veld/input/config/
         file_type: "cfg"
-        environment: in_spacy_config
-        contents: "spacy training config"
+        environment_var: in_spacy_config
+        content: "spacy training config"
         description: "See https://spacy.io/usage/training/#config"
 
-    outputs:
+    output:
       - volume: /veld/output/
         file_type: "spacy model"
-        contents: 
+        content: 
           - "NLP model"
           - "spacy model"
       - volume: /veld/output/
         file_type: "txt"
-        environment: out_train_log_file
+        environment_var: out_train_log_file
         description: "path to the train log file"
-        contents: "logs"
+        content: "logs"
       - volume: /veld/output/
         file_type: "txt"
-        environment: out_eval_log_file
+        environment_var: out_eval_log_file
         description: "path to the eval log file"
-        contents: "logs"
+        content: "logs"
 
-    settings:
-      - environment: model_base
+    config:
+      - environment_var: model_base
         description: "spacy model to be used for downstream training."
-        env_type: str
+        var_type: str
 
 services:
   veld_train:

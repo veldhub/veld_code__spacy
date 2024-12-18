@@ -4,49 +4,49 @@ x-veld:
       indices to be precisely at the beginning and end of the words, and also no overlapping
       entity annotations. Then it converts the data to spaCy docbin, and prepares it for training
       by splitting it into train, dev, eval subsets, and shuffling them randomly."
-    topics:
+    topic:
       - "ETL"
       - "NLP"
       - "Machine learning"
 
-    inputs:
+    input:
       - volume: /veld/input/
         file_type: "json"
         description: "name of the csv file, containing NER gold data"
-        environment: in_json_file
-        contents: "NER gold data"
+        environment_var: in_json_file
+        content: "NER gold data"
 
-    outputs:
+    output:
       - volume: /veld/output/docbin/
         description: "path to folder where spacy docbin files will be stored with file names
           `train.spacy, dev.spacy, eval.spacy`"
         file_type: "spacy docbin"
-        contents: "NER gold data"
+        content: "NER gold data"
       - volume: /veld/output/log/
-        environment: out_log_file
+        environment_var: out_log_file
         description: "log file of conversion"
         file_type: "spacy docbin"
-        contents: "NER gold data"
+        content: "NER gold data"
 
-    settings:
-      - environment: model_base
+    config:
+      - environment_var: model_base
         description: "spacy model to be used for conversion."
-        env_type: str
-      - environment: percentage_train
+        var_type: str
+      - environment_var: percentage_train
         description: "percentage of data allocated to training set"
-        env_type: "int"
+        var_type: "int"
         default: 80
-      - environment: percentage_dev
+      - environment_var: percentage_dev
         description: "percentage of data allocated to dev set"
-        env_type: "int"
+        var_type: "int"
         default: 10
-      - environment: percentage_eval
+      - environment_var: percentage_eval
         description: "percentage of data allocated to eval set"
-        env_type: "int"
+        var_type: "int"
         default: 10
-      - environment: seed
+      - environment_var: seed
         description: "seed for initial random shuffling of training data"
-        env_type: "int"
+        var_type: "int"
         default: 42
 
 services:

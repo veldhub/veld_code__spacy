@@ -4,114 +4,114 @@ x-veld:
       https://spacy.io/api/cli#init-config ) and `init fill-config` ( 
       https://spacy.io/api/cli#init-fill-config ) . The output is ai config file used for training; 
       see more here: https://spacy.io/usage/training/#config"
-    topics:
+    topic:
       - "NLP"
       - "Machine learning"
 
-    outputs:
+    output:
       - volume: /veld/output/
         file_type: "cfg"
-        environment: out_spacy_config
-        contents: "spacy training config"
+        environment_var: out_spacy_config
+        content: "spacy training config"
         description: "See https://spacy.io/usage/training/#config"
 
-    settings:
-      - environment: lang
+    config:
+      - environment_var: lang
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: str
-      - environment: tagger
+        var_type: str
+      - environment_var: tagger
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: parser
+      - environment_var: parser
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: ner
+      - environment_var: ner
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: entity_linker
+      - environment_var: entity_linker
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: entity_ruler
+      - environment_var: entity_ruler
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: textcat
+      - environment_var: textcat
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: textcat_multilabel
+      - environment_var: textcat_multilabel
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: lemmatizer
+      - environment_var: lemmatizer
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: trainable_lemmatizer
+      - environment_var: trainable_lemmatizer
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: morphologizer
+      - environment_var: morphologizer
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: attribute_ruler
+      - environment_var: attribute_ruler
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: senter
+      - environment_var: senter
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: sentencizer
+      - environment_var: sentencizer
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: tok2vec
+      - environment_var: tok2vec
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: transformer
+      - environment_var: transformer
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: optimize_efficiency
+      - environment_var: optimize_efficiency
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: optimize_accuracy
+      - environment_var: optimize_accuracy
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: gpu
+      - environment_var: gpu
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
-      - environment: pretraining
+      - environment_var: pretraining
         description: "See https://spacy.io/api/cli#init-config"
-        env_type: bool
+        var_type: bool
         default: false
         optional: true
 

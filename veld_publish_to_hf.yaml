@@ -2,28 +2,28 @@ x-veld:
   code:
     description: "simple service to push spacy models to huggingface. IMPORTANT: Only works from 
       spacy v3.* onwards!"
-    topics:
+    topic:
       - "NLP"
       - "ETL"
 
-    inputs:
+    input:
       - volume: /veld/input/
         file_type: "spacy model"
-        contents: "NLP model"
+        content: "NLP model"
 
-    settings:
-      - environment: model_name
+    config:
+      - environment_var: model_name
         description: "name of the model, to be used for huggingface metadata. IMPORTANT: do not put 
           double underscores into the model name, as this crashes spacy while publishing."
-        env_type: "str"
+        var_type: "str"
         optional: true
-      - environment: version
+      - environment_var: version
         description: "version of the model, to be used for huggingface metadata. IMPORTANT: spacy 
           crashes when the version tag contains the character `v` in front of numeric+dot version 
           identifiers: E.g. `v1.1` crashes, while `1.1` works."
-        env_type: "str"
+        var_type: "str"
         optional: true
-      - environment: hf_token
+      - environment_var: hf_token
         description: "huggingface authentication token. IMPORTANT: It is advised to not hardcode 
           that directly into the yaml file but rather define the environment variable yourself, 
           before calling this docker compose service. On linux and mac, this can be done with 
