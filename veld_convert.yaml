@@ -20,7 +20,7 @@ x-veld:
       - volume: /veld/output/docbin/
         description: "path to folder where spacy docbin files will be stored with file names
           `train.spacy, dev.spacy, eval.spacy`"
-        file_type: "spacy docbin"
+        file_type: "spaCy docbin"
         content: "NER gold data"
       - volume: /veld/output/log/
         environment_var: out_log_file
