@@ -25,8 +25,8 @@ x-veld:
       - volume: /veld/output/log/
         environment_var: out_log_file
         description: "log file of conversion"
-        file_type: "spacy docbin"
-        content: "NER gold data"
+        file_type: "txt"
+        content: "log"
 
     config:
       - environment_var: model_base
