@@ -7,21 +7,21 @@ x-veld:
 
     input:
       - volume: /veld/input/docbin/
-        file_type: "spacy docbin"
+        file_type: "spaCy docbin"
         environment_var: in_train_docbin_file
         content:
           - "NLP gold data"
           - "ML gold data"
           - "gold data"
       - volume: /veld/input/docbin/
-        file_type: "spacy docbin"
+        file_type: "spaCy docbin"
         environment_var: in_dev_docbin_file
         content:
           - "NLP gold data"
           - "ML gold data"
           - "gold data"
       - volume: /veld/input/docbin/
-        file_type: "spacy docbin"
+        file_type: "spaCy docbin"
         environment_var: in_eval_docbin_file
         content: 
           - "NLP gold data"
