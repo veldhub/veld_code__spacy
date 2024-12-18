@@ -31,7 +31,7 @@ x-veld:
           `.env` (with the content simply being `hf_token=<TOKEN>`) file next to the chain veld 
           yaml file, where docker compose would load it from (take care to not commit that to git! 
           Best to add the `.env` to `.gitignore`)."
-        env_type: "str"
+        var_type: "str"
 
 services:
   veld_publish_to_hf:
