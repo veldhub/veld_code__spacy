@@ -7,7 +7,7 @@ x-veld:
     topic:
       - "ETL"
       - "NLP"
-      - "Machine learning"
+      - "Machine Learning"
 
     input:
       - volume: /veld/input/

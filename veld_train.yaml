@@ -3,7 +3,7 @@ x-veld:
     description: "A spacy trainig setup, utilizing spacy v3's config system."
     topic:
       - "NLP"
-      - "Machine learning"
+      - "Machine Learning"
 
     input:
       - volume: /veld/input/docbin/

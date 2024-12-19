@@ -6,7 +6,7 @@ x-veld:
       see more here: https://spacy.io/usage/training/#config"
     topic:
       - "NLP"
-      - "Machine learning"
+      - "Machine Learning"
 
     output:
       - volume: /veld/output/
