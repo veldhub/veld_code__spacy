@@ -1,6 +1,6 @@
 x-veld:
   code:
-    description: "simple service to push spacy models to huggingface. IMPORTANT: Only works from 
+    description: "simple service to push spacy models to huggingface. Important: Only works from 
       spacy v3.* onwards!"
     topic:
       - "NLP"
