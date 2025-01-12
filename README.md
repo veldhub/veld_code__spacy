@@ -1,6 +1,6 @@
 # veld_code__spacy
 
-This repo contains several code velds relating to the spaCy library.
+This repo contains several code velds encapsulating usage of [spaCy](https://spacy.io/).
 
 ## requirements
 
