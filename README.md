@@ -5,15 +5,51 @@ This repo contains several code velds encapsulating usage of [spaCy](https://spa
 ## requirements
 
 - git
-- docker compose
+- docker compose (note: older docker compose versions require running `docker-compose` instead of 
+  `docker compose`)
 
 ## how to use
 
-The following code velds can either be integrated into chain velds or used on their own. More
-information can be found within their respective veld yaml file:
+A code veld may be integrated into a chain veld, or used directly by adapting the configuration 
+within its yaml file and using the template folders provided in this repo. Open the respective veld 
+yaml file for more information.
 
-- [./veld_convert.yaml](./veld_convert.yaml) : converts data to spacy docbin 
-- [./veld_create_config.yaml](./veld_create_config.yaml) : creates a spacy training configuration
-- [./veld_publish_to_hf.yaml](./veld_publish_to_hf.yaml) : publishes to huggingface
-- [./veld_train.yaml](./veld_train.yaml) : training setup
+Run a veld with:
+```
+docker compose -f <VELD_NAME>.yaml up
+```
+
+## contained code velds
+
+**[./veld_convert.yaml](./veld_convert.yaml)**
+
+Converts data to spacy docbin 
+
+```
+docker compose -f veldXX up
+```
+
+**[./veld_create_config.yaml](./veld_create_config.yaml)**
+
+Creates a spacy training configuration
+
+```
+docker compose -f veldXX up
+```
+
+**[./veld_publish_to_hf.yaml](./veld_publish_to_hf.yaml)**
+
+Publishes to huggingface
+
+```
+docker compose -f veldXX up
+```
+
+**[./veld_train.yaml](./veld_train.yaml)**
+
+Training setup
+
+```
+docker compose -f veldXX up
+```
 
