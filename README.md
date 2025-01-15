@@ -26,7 +26,7 @@ docker compose -f <VELD_NAME>.yaml up
 Converts data to spacy docbin 
 
 ```
-docker compose -f veldXX up
+docker compose -f veld_convert.yaml up
 ```
 
 **[./veld_create_config.yaml](./veld_create_config.yaml)**
@@ -34,15 +34,7 @@ docker compose -f veldXX up
 Creates a spacy training configuration
 
 ```
-docker compose -f veldXX up
-```
-
-**[./veld_publish_to_hf.yaml](./veld_publish_to_hf.yaml)**
-
-Publishes to huggingface
-
-```
-docker compose -f veldXX up
+docker compose -f veld_create_config.yaml up
 ```
 
 **[./veld_train.yaml](./veld_train.yaml)**
@@ -50,6 +42,14 @@ docker compose -f veldXX up
 Training setup
 
 ```
-docker compose -f veldXX up
+docker compose -f veld_train.yaml up
+```
+
+**[./veld_publish_to_hf.yaml](./veld_publish_to_hf.yaml)**
+
+Publishes to huggingface
+
+```
+docker compose -f veld_publish_to_hf.yaml up
 ```
 
