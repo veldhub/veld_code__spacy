@@ -1,6 +1,7 @@
 # veld_code__spacy
 
-This repo contains several code velds encapsulating usage of [spaCy](https://spacy.io/).
+This repo contains several [code velds](https://zenodo.org/records/13322913) encapsulating usage 
+of [spaCy](https://spacy.io/).
 
 ## requirements
 
