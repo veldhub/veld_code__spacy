@@ -57,7 +57,7 @@ services:
   veld_train:
     build: .
     working_dir: /veld/code/
-    command: /veld/code/train.sh
+    command: bash /veld/code/train.sh
     volumes:
       - ./src/:/veld/code/
       - ./data/models_base_cache/:/tmp/models_base_cache/

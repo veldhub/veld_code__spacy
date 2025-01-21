@@ -119,7 +119,7 @@ services:
   veld_create_config:
     build: .
     working_dir: /veld/code/
-    command: /veld/code/create_config.sh
+    command: bash /veld/code/create_config.sh
     volumes:
       - ./src/:/veld/code/
       - ./data/configs/:/veld/output/
